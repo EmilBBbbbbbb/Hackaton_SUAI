@@ -43,7 +43,7 @@ def unwarp(img, bm):
     return res
 
 
-def test(args,img_path,fname):
+def main(args,img_path,fname):
     wc_model_file_name = os.path.split(args.wc_model_path)[1]
     wc_model_name = wc_model_file_name[:wc_model_file_name.find('_')]
 
@@ -61,15 +61,7 @@ def test(args,img_path,fname):
     imgorg = cv2.imread(img_path)
     imgorg = cv2.cvtColor(imgorg, cv2.COLOR_BGR2RGB)
     img = cv2.resize(imgorg, wc_img_size)
-    
-    '''
-    # Alternatively use scipy (< v1.2.0) 
-    # TO PRODUCE THE RESULTS REPORTED IN THE PAPER
-    # Comment line 61-63 and uncomment 68-69
-    # For details refer to https://github.com/cvlab-stonybrook/DewarpNet/issues/38 
-    imgorg = m.imread(img_path,mode='RGB')
-    img = m.imresize(imgorg, wc_loaderimg_size)
-    '''
+
     
     img = img[:, :, ::-1]
     img = img.astype(float) / 255.0
@@ -137,7 +129,7 @@ if __name__ == '__main__':
     for fname in os.listdir(args.img_path):
         if '.jpg' in fname or '.JPG' in fname or '.png' in fname:
             img_path=os.path.join( args.img_path,fname)
-            test(args,img_path,fname)
+            main(args,img_path,fname)
 
 
 # python infer.py --wc_model_path ./eval/models/unetnc_doc3d.pkl --bm_model_path ./eval/models/dnetccnl_doc3d.pkl --show
