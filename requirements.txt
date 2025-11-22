@@ -1,8 +1,0 @@
-hdf5storage
-tqdm
-scipy
-numpy
-matplotlib
-torch
-opencv-python
-torchvision
